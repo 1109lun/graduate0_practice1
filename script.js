@@ -20,6 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
             li.remove();
         })
 
+        let finishButton = document.createElement('button');
+        finishButton.textContent = '已完成' ;
+
+        finishButton.addEventListener('click' , function(){
+            li.classList.toggle('done');
+            checkbox.checked = true;
+        })
+
         let checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.classList.add('task-checkbox');
@@ -34,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         li.appendChild(checkbox);
         li.appendChild(textLabel);
         li.appendChild(deleteButton);
+        li.appendChild(finishButton);
         taskList.appendChild(li);
         taskInput.value = '';
     }
