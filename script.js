@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         let li = document.createElement('li') ;
-        li.textContent = taskText;
 
         let deleteButton = document.createElement('button');
         deleteButton.textContent = '刪除任務' ;
@@ -21,6 +20,19 @@ document.addEventListener('DOMContentLoaded', function() {
             li.remove();
         })
 
+        let checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.classList.add('task-checkbox');
+
+        checkbox.addEventListener('change', function(){
+            li.classList.toggle('done' , checkbox.checked);
+        })
+
+        let textLabel = document.createElement('span');
+        textLabel.textContent = taskText;
+
+        li.appendChild(checkbox);
+        li.appendChild(textLabel);
         li.appendChild(deleteButton);
         taskList.appendChild(li);
         taskInput.value = '';
@@ -33,4 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
             addTask();
         }
     })
+
+
 })
