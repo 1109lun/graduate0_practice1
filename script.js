@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         finishButton.addEventListener('click' , function(){
             li.classList.toggle('done');
-            checkbox.checked = true;
+            checkbox.checked = !checkbox.checked;
         })
 
         let checkbox = document.createElement('input');

@@ -1,0 +1,10 @@
+.done {
+    text-decoration: line-through;
+    color : gray;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
