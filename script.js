@@ -55,5 +55,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })
 
+    function addTask(){
+        let tasks = [];
+        document.querySelectorAll('#taskList li').forEach(function(li){
+            let checkbox = li.querySelector('.task-checkbox');
+            let textLabel = li.querySelector('span');
+
+            tasks.push({
+                text : textLabel.textContent,
+                completed : checkbox.checked
+            }) ;
+        });
+        localStorage.setItem("tasks" , JSON.stringify(tasks));
+    }
+
 
 })
