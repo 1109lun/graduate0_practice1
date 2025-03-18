@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const addButton = document.getElementById('add');
     const taskList = document.getElementById('taskList');
 
+    loadTasks();
+
     function addTask(){
         let taskText = taskInput.value.trim();
 
@@ -55,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })
 
-    function addTask(){
+    function saveTasks(){
         let tasks = [];
         document.querySelectorAll('#taskList li').forEach(function(li){
             let checkbox = li.querySelector('.task-checkbox');
@@ -69,5 +71,39 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem("tasks" , JSON.stringify(tasks));
     }
 
+    function loadTasks(){
+        let savedTasks = JSON.parse(localStorage.getItem('tasks')) || [] ;
+        savedTasks.forEach(task => {
+            let li = document.createElement('li') ;
 
-})
+            let checkbox = document.createElement('input') ;
+            checkbox.type = 'checkbox';
+            checkbox.classList.add('task-checkbox');
+            checkbox.checked = task.completed;
+            if (task.completed) {
+                li.classList.add('done');
+            }
+
+            checkbox.addEventListener('change' , function(){
+                li.classList.toggle('completed' , checkbox.checked);
+                saveTasks();
+            }) ;
+
+            let taskLabel = document.createElement('span') ;
+            taskLabel.textContent = task.text;
+
+            let deleteButton = document.createElement('button');
+            deleteButton.textContent = '刪除' ;
+            deleteButton.addEventListener('click' , function(event){
+                event.stopPropagation();
+                li.remove();
+                saveTasks();
+            });
+
+            li.appendChild(checkbox);
+            li.appendChild(taskLabel);
+            li.appendChild(deleteButton);
+            taskList.appendChild(li);
+        }) ;
+    }
+}) ;
