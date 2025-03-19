@@ -66,6 +66,9 @@ document.addEventListener('DOMContentLoaded', function() {
         taskInput.value = '';
 
         saveTasks();
+
+        console.log("目前的任務列表：", localStorage.getItem("tasks"));
+
     }
     
     addButton.addEventListener('click' , addTask);
