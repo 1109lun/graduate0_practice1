@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const taskInput = document.getElementById('task');
     const addButton = document.getElementById('add');
     const taskList = document.getElementById('taskList');
+    const clearButton = document.getElementById('clearall');
 
     loadTasks();
 
@@ -43,8 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 li.remove();
                 saveTasks();
             }
-            
-        });
+        }); 
 
         li.appendChild(checkbox);
         li.appendChild(taskLabel);
@@ -82,6 +82,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })
 
+    clearButton.addEventListener('click' , function(){
+        if (confirm('確定要刪除所有任務嗎？')){
+            taskList.innerHTML = '';
+            localStorage.removeItem('tasks');
+        }
+    });
+    
     function saveTasks(){
         let tasks = [];
         document.querySelectorAll('#taskList li').forEach(function(li){
