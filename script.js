@@ -39,8 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
         })
 
         deleteButton.addEventListener('click' , function(){
-            li.remove();
-            saveTasks();
+            if (confirm('確定要刪除嗎？') ){
+                li.remove();
+                saveTasks();
+            }
+            
         });
 
         li.appendChild(checkbox);
