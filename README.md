@@ -9,10 +9,10 @@
 
 技術與工具
 
--**前端技術** ： HTML + CSS + JavaScript
--**儲存方式** ： localstorage
--**版本控制** ： Git + GitHub
--**部署平台** ： GitHub Pages
+- **前端技術** ： HTML + CSS + JavaScript
+- **儲存方式** ： localstorage
+- **版本控制** ： Git + GitHub
+- **部署平台** ： GitHub Pages
 
 ---
 
