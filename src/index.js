@@ -1,3 +1,5 @@
+import './style.css';
+
 document.addEventListener('DOMContentLoaded', function() {
     const taskInput = document.getElementById('task');
     const addButton = document.getElementById('add');
