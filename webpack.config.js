@@ -1,20 +1,26 @@
-// webpack.config.js
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //  1. 引入套件
 
 module.exports = {
-  entry: './src/index.js', // JS 進入點
+  entry: './src/index.js',
   output: {
-    filename: 'main.js', // 輸出 JS 檔名
-    path: path.resolve(__dirname, 'dist'), // 輸出資料夾
-    clean: true, // 每次 build 清除 dist
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'], // 讓 JS 可以 import CSS
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html', //  2. 指定你原本的 HTML 模板
+      filename: 'index.html',       //  3. 打包後的檔案名稱
+    }),
+  ],
   mode: 'development',
 };
