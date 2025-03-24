@@ -73,9 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
         taskInput.value = '';
 
         saveTasks();
-
-        console.log("目前的任務列表：", localStorage.getItem("tasks"));
-
     }
     
     addButton.addEventListener('click' , addTask);
@@ -111,6 +108,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         localStorage.setItem("tasks" , JSON.stringify(tasks));
+        console.log("目前的任務列表：");
+        console.table(JSON.parse(localStorage.getItem("tasks")));
     }
 
     function loadTasks(){
