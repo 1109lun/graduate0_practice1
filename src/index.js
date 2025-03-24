@@ -35,6 +35,10 @@ function handleToggle(task , li , finishButton) {
     task.completed = !task.completed;
     li.classList.toggle('done' , task.completed);
     finishButton.textContent = task.completed ? '未完成' : '已完成';
+
+    const checkbox = li.querySelector('.task-checkbox');
+    checkbox.checked = task.completed
+    
     saveTasks(taskList);
 }
 
