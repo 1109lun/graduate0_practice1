@@ -1,4 +1,4 @@
-export function createElement(task , ondelete , ontoggle) {
+export function createTaskElement(task , onDelete , onToggle) {
     const li = document.createElement('li') ;
 
     const checkbox = document.createElement('input') ;
@@ -16,18 +16,17 @@ export function createElement(task , ondelete , ontoggle) {
     finishButton.textContent = task.completed ? '未完成' : '已完成' ;
 
     checkbox.addEventListener('change' , () => {
-        ontoggle(task , li , finishButton) ;
+        onToggle(task , li , finishButton) ;
     });
 
     finishButton.addEventListener('click' , () => {
-        task.completed = !task.completed;
         checkbox.checked = task.completed;
-        ontoggle(task , li , finishButton);
+        onToggle(task , li , finishButton);
     });
 
     deleteButton.addEventListener('click' , function(){
         if (confirm('確定要刪除嗎？') ){
-            ondelete(li) ;
+            onDelete(li) ;
         }
     }); 
 
