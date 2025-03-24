@@ -22,5 +22,11 @@ module.exports = {
       filename: 'index.html',       //  3. 打包後的檔案名稱
     }),
   ],
+  devServer: {
+    static: './dist',   // 告訴 dev server 從哪個資料夾提供內容
+    open: true,         // 自動打開瀏覽器
+    port: 8080,         // 可自訂 port（預設是 8080）
+  },
+  
   mode: 'development',
 };
