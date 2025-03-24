@@ -6,7 +6,7 @@ export function saveTasks(taskListEl) {
         const checkbox = li.querySelector('.task-checkbox');
         const title = li.querySelector('span').textContent;
 
-        const task = new Task(title, '', '', 'normal');
+        const task = new Task(title, '', '', 'normal' , checkbox.checked);
         task.completed = checkbox.checked;
         tasks.push(task);
     });
