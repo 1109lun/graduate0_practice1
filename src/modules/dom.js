@@ -16,11 +16,13 @@ export function createTaskElement(task , onDelete , onToggle) {
     finishButton.textContent = task.completed ? '未完成' : '已完成' ;
 
     checkbox.addEventListener('change' , () => {
-        onToggle(task , li , finishButton) ;
+        onToggle(task) ;
     });
 
     finishButton.addEventListener('click' , () => {
-        onToggle(task , li , finishButton);
+        task.completed = !task.completed ;
+        checkbox.checked = task.completed ;
+        onToggle(task);
     });
 
     deleteButton.addEventListener('click' , function(){
