@@ -1,24 +1,18 @@
+import Project from "./Project";
 import Task from "./Task";
 
-export function saveTasks(taskListEl) {
-    const tasks = [];
-    taskListEl.querySelectorAll('li').forEach(li => {
-        const checkbox = li.querySelector('.task-checkbox');
-        const title = li.querySelector('span').textContent;
-
-        const task = new Task(title, '', '', 'normal' , checkbox.checked);
-        task.completed = checkbox.checked;
-        tasks.push(task);
-    });
-
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    console.log("目前的任務列表：");
-    console.table(JSON.parse(localStorage.getItem("tasks")));
+export function saveProjects(projects) {
+    localStorage.setItem("projects", JSON.stringify(projects));
+    console.log("目前的專案列表：");
+    console.table(JSON.parse(localStorage.getItem("projects")));
 }
 
-export function loadTasks() {
-    const saved = JSON.parse(localStorage.getItem('tasks')) || [];
-    return saved.map(
-        (t) => new Task(t.title, t.description, t.dueDate, t.priority, t.completed)
-    );
+export function loadProjects() {
+    const raw = JSON.parse(localStorage.getItem("projects")) || [];
+    
+    return raw.map(p => {
+        const project = new Project(p.name);
+        project.tasks = p.tasks.map(t => {t.title, t.description, t.dueDate, t.priority, t.completed});
+        return project;
+        });
 }
