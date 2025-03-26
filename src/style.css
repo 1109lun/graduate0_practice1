@@ -1,3 +1,47 @@
+header {
+    background-color: aquamarine;
+    padding: 10px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 2px solid black;
+}
+
+.app-container {
+    height: 100vh;
+    display: flex;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.sidebar {
+    background-color: #e6ecb4;
+    width: 250px;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-right: 2px solid black;
+}
+
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+h1,h2 {
+    margin-top: 0;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .done span{
     text-decoration: line-through;
     color : gray;
@@ -44,6 +88,18 @@ li {
     padding: 10px;
     background-color: white;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: silver;
+    border : 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 input {
