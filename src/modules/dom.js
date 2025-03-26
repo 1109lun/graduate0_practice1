@@ -20,8 +20,6 @@ export function createTaskElement(task , onDelete , onToggle) {
     });
 
     finishButton.addEventListener('click' , () => {
-        task.completed = !task.completed ;
-        checkbox.checked = task.completed ;
         onToggle(task);
     });
 
