@@ -9,10 +9,11 @@ export function saveProjects(projects) {
 
 export function loadProjects() {
     const raw = JSON.parse(localStorage.getItem("projects")) || [];
-    
+
     return raw.map(p => {
-        const project = new Project(p.name);
-        project.tasks = p.tasks.map(t => {t.title, t.description, t.dueDate, t.priority, t.completed});
-        return project;
-        });
+        const tasks = (p.tasks || []).map(
+            t => new Task(t.title, t.description, t.dueDate, t.priority, t.completed)
+        );
+        return new Project(p.name, tasks);
+    });
 }
