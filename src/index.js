@@ -9,7 +9,6 @@ const taskInput = document.getElementById('task');
 const addButton = document.getElementById('add');
 const taskList = document.getElementById('taskList');
 const clearButton = document.getElementById('clearall');
-//const savedTasks = loadTasks();
 
 let projects = loadProjects();
 let currentProject = projects.find(p => p.name === 'Inbox') || new Project('Inbox');
@@ -17,6 +16,43 @@ let currentProject = projects.find(p => p.name === 'Inbox') || new Project('Inbo
 if (!projects.find(p => p.name === 'Inbox')){
     projects.push(currentProject);
     saveProjects(projects);
+}
+
+document.getElementById('addProject').addEventListener('click' , () => {
+    const ProjectName = prompt('請輸入專案名稱');
+    if (ProjectName === null || ProjectName.trim() === ''){
+        return ;
+    }
+    if (projects.find(p => p.name === ProjectName)){
+        alert('專案已存在');
+        return ;
+    }
+
+    const newProject = new Project(ProjectName);
+    projects.push(newProject);
+    saveProjects(projects);
+    renderProjectList(projects);
+});     
+
+function renderProjectList(projects){
+    const projectList = document.getElementById('ProjectList');
+    projectList.innerHTML = '';
+    projects.forEach(project => {
+        const li = document.createElement('li');
+        li.textContent = project.name;
+        li.classList.add('project');
+        if (project === currentProject){
+            li.classList.add('active');
+        }
+        li.addEventListener('click' , () => {
+            currentProject = project;
+            console.log("切換專案為：", currentProject.name);
+            document.getElementById('currentProject').textContent = currentProject.name;
+            renderTaskList(currentProject.tasks);
+            renderProjectList(projects);
+        });
+        projectList.appendChild(li);
+    });
 }
 
 renderTaskList(currentProject.tasks);
@@ -50,6 +86,7 @@ function handleToggle(task) {
 
 function renderTaskList(tasks){
     taskList.innerHTML = '';
+    console.log("目前任務數：", tasks.length); 
     tasks.forEach(task => {
         const li = createTaskElement(task , handleDelete , handleToggle);
         taskList.appendChild(li);
@@ -70,9 +107,6 @@ clearButton.addEventListener('click' , function(){
     }
 });
 
-/*savedTasks.forEach(task => {
-    const li = createTaskElement(task , handleDelete , handleToggle);
-    taskList.appendChild(li);
-});*/
-
 addButton.addEventListener('click' , addTask);
+
+renderProjectList(projects);
