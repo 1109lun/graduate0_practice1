@@ -3,6 +3,7 @@ import Task from './modules/Task.js';
 import Project from './modules/Project.js';
 import { createTaskElement } from './modules/dom.js';
 import { saveProjects , loadProjects} from './modules/storage.js';
+import { de } from 'date-fns/locale';
 
 
 const taskInput = document.getElementById('task');
@@ -11,11 +12,15 @@ const taskList = document.getElementById('taskList');
 const clearButton = document.getElementById('clearall');
 
 let projects = loadProjects();
-let currentProject = projects.find(p => p.name === 'Inbox') || new Project('Inbox');
+let currentProject = null;
 
-if (!projects.find(p => p.name === 'Inbox')){
-    projects.push(currentProject);
+if (projects.length === 0){
+    const defaultProject = new Project('Inbox');
+    projects.push(defaultProject);
+    currentProject = defaultProject;
     saveProjects(projects);
+} else {
+    currentProject = projects[0];
 }
 
 document.getElementById('addProject').addEventListener('click' , () => {
@@ -36,10 +41,11 @@ document.getElementById('addProject').addEventListener('click' , () => {
 
 document.getElementById('deleteProject').addEventListener('click' , () => {
         if (confirm('確定要刪除專案嗎？')) {
-            projects = projects.filter(p => p !== currentProject);
+            const deleted = currentProject;
+            projects = projects.filter(p => p !== deleted);
 
-            if (!projects.includes(currentProject)){
-                currentProject = null;
+            if (currentProject === deleted){
+                currentProject = projects[0] || null;
             }
 
             renderTaskList(currentProject ? currentProject.tasks : []);
@@ -69,7 +75,9 @@ function renderProjectList(projects){
     });
 }
 
-renderTaskList(currentProject.tasks);
+renderProjectList(projects);
+renderTaskList(currentProject ? currentProject.tasks : []);
+
 
 function addTask(){
     if (!currentProject) {
@@ -105,14 +113,14 @@ function handleToggle(task) {
 function renderTaskList(tasks){
     taskList.innerHTML = '';
     console.log("目前任務數：", tasks.length); 
-    
+
     const header = document.getElementById('currentProject');
 
     if (!currentProject) {
       header.textContent = '尚未選擇專案';
       return;
     }
-
+  
     header.textContent = currentProject.name;
 
     tasks.forEach(task => {
