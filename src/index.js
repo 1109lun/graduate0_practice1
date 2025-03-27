@@ -34,6 +34,20 @@ document.getElementById('addProject').addEventListener('click' , () => {
     renderProjectList(projects);
 });     
 
+document.getElementById('deleteProject').addEventListener('click' , () => {
+        if (confirm('確定要刪除專案嗎？')) {
+            projects = projects.filter(p => p !== currentProject);
+
+            if (!projects.includes(currentProject)){
+                currentProject = null;
+            }
+
+            renderTaskList(currentProject ? currentProject.tasks : []);
+            saveProjects(projects);
+            renderProjectList(projects);
+        }
+});
+
 function renderProjectList(projects){
     const projectList = document.getElementById('ProjectList');
     projectList.innerHTML = '';
@@ -58,6 +72,10 @@ function renderProjectList(projects){
 renderTaskList(currentProject.tasks);
 
 function addTask(){
+    if (!currentProject) {
+        alert('請先選擇一個專案');
+        return;
+    }
     const taskText = taskInput.value.trim();
 
     if (taskText === '') {
@@ -87,6 +105,16 @@ function handleToggle(task) {
 function renderTaskList(tasks){
     taskList.innerHTML = '';
     console.log("目前任務數：", tasks.length); 
+    
+    const header = document.getElementById('currentProject');
+
+    if (!currentProject) {
+      header.textContent = '尚未選擇專案';
+      return;
+    }
+
+    header.textContent = currentProject.name;
+
     tasks.forEach(task => {
         const li = createTaskElement(task , handleDelete , handleToggle);
         taskList.appendChild(li);
