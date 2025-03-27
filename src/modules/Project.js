@@ -1,7 +1,7 @@
 export default class Project {
     constructor(name , tasks = []){
         this.name = name;
-        this.tasks = [];
+        this.tasks = tasks;
     }
 
     addTask(task){
@@ -9,7 +9,7 @@ export default class Project {
     }
 
     removeTask(task){
-        this.tasks = this.tasks.filter(t => t !== task);
+        this.tasks = this.tasks.filter(t => t.title !== task.title);
     }
 
     getTasks(){

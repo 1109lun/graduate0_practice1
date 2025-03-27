@@ -3,8 +3,6 @@ import Task from './modules/Task.js';
 import Project from './modules/Project.js';
 import { createTaskElement } from './modules/dom.js';
 import { saveProjects , loadProjects} from './modules/storage.js';
-import { de } from 'date-fns/locale';
-
 
 const taskInput = document.getElementById('task');
 const addButton = document.getElementById('add');
@@ -12,7 +10,7 @@ const taskList = document.getElementById('taskList');
 const clearButton = document.getElementById('clearall');
 
 let projects = loadProjects();
-let currentProject = null;
+let currentProject ;
 
 if (projects.length === 0){
     const defaultProject = new Project('Inbox');
@@ -22,6 +20,9 @@ if (projects.length === 0){
 } else {
     currentProject = projects[0];
 }
+
+renderProjectList(projects);
+renderTaskList(currentProject ? currentProject.tasks : []);
 
 document.getElementById('addProject').addEventListener('click' , () => {
     const ProjectName = prompt('請輸入專案名稱');
@@ -75,10 +76,6 @@ function renderProjectList(projects){
     });
 }
 
-renderProjectList(projects);
-renderTaskList(currentProject ? currentProject.tasks : []);
-
-
 function addTask(){
     if (!currentProject) {
         alert('請先選擇一個專案');
@@ -99,6 +96,7 @@ function addTask(){
 }
 
 function handleDelete(task){
+    console.log("刪除任務：", task.title);
     currentProject.removeTask(task);
     renderTaskList(currentProject.tasks);
     saveProjects(projects);
@@ -120,7 +118,7 @@ function renderTaskList(tasks){
       header.textContent = '尚未選擇專案';
       return;
     }
-  
+
     header.textContent = currentProject.name;
 
     tasks.forEach(task => {
@@ -144,5 +142,3 @@ clearButton.addEventListener('click' , function(){
 });
 
 addButton.addEventListener('click' , addTask);
-
-renderProjectList(projects);
