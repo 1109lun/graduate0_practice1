@@ -42,6 +42,32 @@ html, body {
     padding: 0;
 }
 
+#ProjectList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.project {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.project:hover {
+    transform: scale(1.05);
+}
+
+.project.active {
+    background-color: #8dc1ef;
+    font-weight: bold;
+    border: 2px solid black;
+}
 .done span{
     text-decoration: line-through;
     color : gray;
