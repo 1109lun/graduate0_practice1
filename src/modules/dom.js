@@ -25,7 +25,7 @@ export function createTaskElement(task , onDelete , onToggle) {
 
     deleteButton.addEventListener('click' , function(){
         if (confirm('確定要刪除嗎？') ){
-            onDelete(li) ;
+            onDelete(task); ;
         }
     }); 
 
