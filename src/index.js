@@ -10,9 +10,32 @@ const taskList = document.getElementById('taskList');
 const clearButton = document.getElementById('clearall');
 const taskDialog = document.getElementById('taskDialog');
 const cancelDialog = document.getElementById('cancelDialog');
+const taskForm = document.getElementById('taskForm');
 
 addButton.addEventListener('click' , () => {
     taskDialog.showModal();
+});
+
+taskForm.addEventListener('submit' , (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById('taskTitle').value.trim();
+    const description = document.getElementById('taskDescription').value.trim();
+    const dueDate = document.getElementById('taskDueDate').value.trim();
+    const priority = document.getElementById('taskPriority').value.trim();
+
+    if( title === '' || description === '' || dueDate === '' || priority === ''){
+        alert('請填寫所有欄位');
+        return ;
+    }
+
+    const task = new Task(title , description , dueDate , priority);
+    currentProject.addTask(task);
+    renderTaskList(currentProject.tasks);
+    saveProjects(projects);
+
+    taskDialog.close();
+    taskForm.reset();
 });
 
 cancelDialog.addEventListener('click' , () => {
