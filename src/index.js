@@ -4,7 +4,6 @@ import Project from './modules/Project.js';
 import { createTaskElement } from './modules/dom.js';
 import { saveProjects , loadProjects} from './modules/storage.js';
 
-//const taskInput = document.getElementById('task');
 const addButton = document.getElementById('add');
 const taskList = document.getElementById('taskList');
 const clearButton = document.getElementById('clearall');
@@ -29,6 +28,12 @@ taskForm.addEventListener('submit' , (e) => {
         return ;
     }
 
+    const existing = currentProject.tasks.find(t => t.title === title);
+    if (existing) {
+      alert('已經有相同標題的任務囉！請使用不同的名稱。');
+      return;
+    }
+    
     const task = new Task(title , description , dueDate , priority);
     currentProject.addTask(task);
     renderTaskList(currentProject.tasks);
@@ -109,25 +114,6 @@ function renderProjectList(projects){
     });
 }
 
-/*function addTask(){
-    if (!currentProject) {
-        alert('請先選擇一個專案');
-        return;
-    }
-    const taskText = taskInput.value.trim();
-
-    if (taskText === '') {
-        alert('請輸入任務')
-        return ;
-    }
-
-    const task = new Task(taskText);
-    currentProject.addTask(task);
-    renderTaskList(currentProject.tasks);
-    saveProjects(projects);
-    taskInput.value = '';
-}*/
-
 function handleDelete(task){
     console.log("刪除任務：", task.title);
     currentProject.removeTask(task);
@@ -160,12 +146,6 @@ function renderTaskList(tasks){
     });
 }
 
-/*taskInput.addEventListener('keypress' , function(event){
-    if (event.key === 'Enter'){
-        addTask();
-    }
-}) ;*/
-
 clearButton.addEventListener('click' , function(){
     if (confirm('確定要刪除所有任務嗎？')){
         currentProject.tasks = [];
@@ -173,5 +153,3 @@ clearButton.addEventListener('click' , function(){
         saveProjects(projects);
     }
 });
-
-//addButton.addEventListener('click' , addTask);
