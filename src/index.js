@@ -33,7 +33,7 @@ taskForm.addEventListener('submit' , (e) => {
       alert('已經有相同標題的任務囉！請使用不同的名稱。');
       return;
     }
-    
+
     const task = new Task(title , description , dueDate , priority);
     currentProject.addTask(task);
     renderTaskList(currentProject.tasks);
@@ -140,10 +140,20 @@ function renderTaskList(tasks){
 
     header.textContent = currentProject.name;
 
-    tasks.forEach(task => {
+    const priorityOrder = { High: 3, Medium: 2, Low: 1 };
+    const sortedTasks = [...tasks].sort((a, b) => {
+      return priorityOrder[b.priority] - priorityOrder[a.priority];
+    });
+  
+    sortedTasks.forEach(task => {
+      const li = createTaskElement(task, handleDelete, handleToggle);
+      taskList.appendChild(li);
+    });
+
+    /*tasks.forEach(task => {
         const li = createTaskElement(task , handleDelete , handleToggle);
         taskList.appendChild(li);
-    });
+    });*/
 }
 
 clearButton.addEventListener('click' , function(){
