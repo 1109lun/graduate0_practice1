@@ -6,8 +6,37 @@ export function createTaskElement(task , onDelete , onToggle) {
     checkbox.classList.add('task-checkbox');
     checkbox.checked = task.completed;
 
-    const taskLabel = document.createElement('span') ;
-    taskLabel.textContent = task.title;
+    const taskTextContainer = document.createElement('div') ;
+    taskTextContainer.classList.add('task-text');
+
+    const title = document.createElement('div') ;
+    title.classList.add('task-title');
+    title.textContent = task.title ;
+
+    const description = document.createElement('div') ;
+    description.textContent = task.description ;
+    description.classList.add('task-description');
+
+    const dueDate = document.createElement('div') ;
+    dueDate.textContent = `到期日：${task.dueDate}`;
+    dueDate.classList.add('task-dueDate');
+
+    const priority = document.createElement('div') ;
+    priority.textContent = `優先度：${task.priority}`;
+    priority.classList.add('task-priority');
+
+    if (task.priority === 'High') {
+        priority.classList.add('high');
+    } else if (task.priority === 'Medium') {
+        priority.classList.add('medium');
+    } else if (task.priority === 'Low') {
+        priority.classList.add('low');
+    }
+
+    taskTextContainer.appendChild(title);
+    taskTextContainer.appendChild(description);
+    taskTextContainer.appendChild(dueDate);
+    taskTextContainer.appendChild(priority);
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = '刪除' ;
@@ -34,7 +63,7 @@ export function createTaskElement(task , onDelete , onToggle) {
     };
 
     li.appendChild(checkbox);
-    li.appendChild(taskLabel);
+    li.appendChild(taskTextContainer);
     li.appendChild(deleteButton);
     li.appendChild(finishButton);
 
