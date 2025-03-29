@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 export function createTaskElement(task , onDelete , onToggle) {
     const li = document.createElement('li') ;
 
@@ -17,8 +19,9 @@ export function createTaskElement(task , onDelete , onToggle) {
     description.textContent = task.description ;
     description.classList.add('task-description');
 
+    const formattedDate = format(new Date(task.dueDate), 'yyyy/MM/dd');
     const dueDate = document.createElement('div') ;
-    dueDate.textContent = `到期日：${task.dueDate}`;
+    dueDate.textContent = `到期日：${formattedDate}`;
     dueDate.classList.add('task-dueDate');
 
     const priority = document.createElement('div') ;
