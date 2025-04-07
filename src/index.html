@@ -1,63 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>To-Do List</title>
-    </head>
-    <body>
-        <header>
-            <h1>To-Do List</h1>
-        </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+  </head>
+  <body>
+    <header>
+      <h1>To-Do List</h1>
+    </header>
 
-        <div class="app-container">
-            <aside class = 'sidebar'>
-                <h2>Projects</h2>
-                <ul id = "ProjectList"></ul>
-                <button id = "addProject">新增專案</button>
-                <button id ='deleteProject'>刪除專案</button>
-            </aside>
+    <div class="app-container">
+      <aside class="sidebar">
+        <h2>Projects</h2>
+        <ul id="ProjectList"></ul>
+        <button id="addProject">新增專案</button>
+        <button id="deleteProject">刪除專案</button>
+      </aside>
 
-            <main class = "main-content">
-                <h2 id="currentProject">Inbox</h2>
+      <main class="main-content">
+        <h2 id="currentProject">Inbox</h2>
 
-                <div class = "task-input-area">
-                    <!--<input type="text" id="task" placeholder="Enter a task" maxlength="30">-->
-                    <button id="add">新增任務</button>
-                    <button id="clearall">清除所有任務</button>
-                </div>
+        <div class="task-input-area">
+          <!--<input type="text" id="task" placeholder="Enter a task" maxlength="30">-->
+          <button id="add">新增任務</button>
+          <button id="clearall">清除所有任務</button>
+        </div>
 
-                <ul id="taskList"></ul>
-                
-            </main>
-        </div>  
+        <ul id="taskList"></ul>
+      </main>
+    </div>
 
-        <dialog id = 'taskDialog'>
-            <form method="dialog" id = 'taskForm'>
-                <h2>新增任務</h2>
-                <label>
-                    Title ： <input type="text" id="taskTitle" required>
-                </label>
-                <label>
-                    Description ： <textarea id = "taskDescription" required></textarea>
-                </label>
-                <label>
-                    DueDate ： <input type="date" id="taskDueDate" required>
-                </label>
-                <label>
-                    Priority ：
-                    <select id = 'taskPriority' required>
-                        <option value="Low">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
-                    </select>
-                </label>
+    <dialog id="taskDialog">
+      <form method="dialog" id="taskForm">
+        <h2>新增任務</h2>
+        <label> Title ： <input type="text" id="taskTitle" required /> </label>
+        <label> Description ： <textarea id="taskDescription" required></textarea></label>
+        <label> DueDate ： <input type="date" id="taskDueDate" required /> </label>
+        <label>
+          Priority ：
+          <select id="taskPriority" required>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </label>
 
-                <menu>
-                    <button type = 'submit'>新增</button>
-                    <button type = 'button' id = 'cancelDialog'>取消</button>
-                </menu>
-            </form>
-        </dialog>
-    </body>
+        <menu>
+          <button type="submit">新增</button>
+          <button type="button" id="cancelDialog">取消</button>
+        </menu>
+      </form>
+    </dialog>
+  </body>
 </html>
