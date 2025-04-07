@@ -1,5 +1,7 @@
 # To-Do List
 
+## 練習一
+
 這是一個簡單的**To-Do List**，使用HTML、CSS和JavaScript製作。<br>
 可以讓使用者**新增、刪除和標記完成任務**，並且使用localstorage來儲存任務，重新整理網頁後重新整理網頁後仍能保留任務清單。
 
@@ -15,3 +17,8 @@
 - **部署平台** ： GitHub Pages
 
 ---
+## 練習二
+
+- **建置工具**：Webpack
+- **套件管理**：npm
+- **開發伺服器**：webpack-dev-server
